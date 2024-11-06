@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
-import { getVerificationData } from "../api/accounts/getVerificationData";
-import { validateAccount } from "../api/accounts/validateAccount";
+import { getVerificationData } from "../../api/accounts/getVerificationData";
+import { validateAccount } from "../../api/accounts/validateAccount";
 import { useNavigate } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast';
 import toast from 'react-hot-toast'
@@ -14,7 +14,6 @@ export const ActivationAccountPage = () => {
     const loading = toast.loading('Loading') //arreglar
     const { uid, token } = await getVerificationData()
     const { status } = await validateAccount(uid, token)
-    console.log(status)
     
     if(status === 204) {
         toast.dismiss(loading)

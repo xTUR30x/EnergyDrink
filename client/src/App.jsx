@@ -1,12 +1,12 @@
 import { Route, Routes } from 'react-router-dom';
 import { LandingPage } from './pages/landing/LandingPage';
 import { CartPage } from './pages/cart/CartPage';
-import { LoginPage } from './pages/LoginPage';
-import { RegisterPage } from './pages/RegisterPage';
-import { ActivationGoogleAccountPage } from './pages/ActivationGoogleAccountPage';
-import { ChangePasswrodPage } from './pages/ChangePasswordPage';
-import { ActivationAccountPage } from './pages/ActivationAccountPage';
-import { ForgotPasswordPage } from './pages/ForgotPasswordPage';
+import { LoginPage } from './pages/authentication/LoginPage';
+import { RegisterPage } from './pages/authentication/RegisterPage';
+import { ActivationGoogleAccountPage } from './pages/authentication/ActivationGoogleAccountPage';
+import { ChangePasswrodPage } from './pages/authentication/ChangePasswordPage';
+import { ActivationAccountPage } from './pages/authentication/ActivationAccountPage';
+import { ForgotPasswordPage } from './pages/authentication/ForgotPasswordPage';
 import { UserProfile } from './pages/profile/UserProfile';
 import { OrderPage } from './pages/orders/OrderPage';
 import { StaffPage } from './pages/staff/StaffPage';

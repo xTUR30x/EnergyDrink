@@ -1,8 +1,8 @@
 import React from 'react'
 import { AiOutlineLock } from 'react-icons/ai'
-import { InputField } from '../components/InputField';
+import { InputField } from '../../components/InputField';
 import { Toaster } from 'react-hot-toast';
-import { useChangePassword } from '../hooks/accounts/useChangePasswordPage';
+import { useChangePassword } from '../../hooks/accounts/useChangePasswordPage';
 
 
 

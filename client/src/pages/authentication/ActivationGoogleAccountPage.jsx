@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { googleAuthentication } from '../api/accounts/googleAuthentication';
+import { googleAuthentication } from '../../api/accounts/googleAuthentication';
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast';
 import toast from 'react-hot-toast'
@@ -14,7 +14,6 @@ export const ActivationGoogleAccountPage = () => {
 
     const loading = toast.loading('Loading') //arreglar
     const { data } = await googleAuthentication(state, code)
-    console.log(data)
     
     if(data.status === 204) {
         toast.dismiss(loading)

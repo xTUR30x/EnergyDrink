@@ -1,8 +1,8 @@
-import React , { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import { DesktopHeader } from './DesktopHeader';
 import { MobileHeader } from './MobileHeader';
 
-export const Header = () => {
+export const Header = ({ onSearch }) => { // Recibe onSearch como prop
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
     const handleResize = () => {
@@ -18,7 +18,7 @@ export const Header = () => {
 
     return (
         <>
-            {isMobile ? <MobileHeader /> : <DesktopHeader />}
+            {isMobile ? <MobileHeader onSearch={onSearch} /> : <DesktopHeader onSearch={onSearch} />} {/* Pasa onSearch directamente */}
         </>
     );
-}
+};

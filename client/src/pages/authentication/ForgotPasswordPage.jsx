@@ -1,8 +1,8 @@
 import React from 'react'
 import { Toaster } from 'react-hot-toast'
 import { CiMail } from "react-icons/ci";
-import { useForgotPasswordPage } from '../hooks/accounts/useForgotPasswordPage'
-import { InputField } from '../components/InputField'
+import { useForgotPasswordPage } from '../../hooks/accounts/useForgotPasswordPage'
+import { InputField } from '../../components/InputField'
 
 export const ForgotPasswordPage = () => {
     

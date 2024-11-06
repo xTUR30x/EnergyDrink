@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export const login = async ( user: Object ) => {
 
-    const url = `http://localhost:8000/users/token/`
+    const url = `http://localhost:8000/auth/jwt/login/`
 
     try {
         const response = await axios.post(url, user)

@@ -2,10 +2,12 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 from django.conf import settings
 from django.conf.urls.static import static
+from .views import CustomTokenObtainPairView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('auth/jwt/login/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.jwt')),
     path('auth/', include('djoser.social.urls')),

@@ -16,7 +16,7 @@ class PendingOrderView(generics.GenericAPIView):
         return Response(serializer.data)
 
 class UserOrdersView(generics.GenericAPIView):
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request, user_id):
         orders = Order.objects.filter(customer_id=user_id, state__in=[Order.SHIPPED, Order.DELIVERED])
@@ -25,7 +25,7 @@ class UserOrdersView(generics.GenericAPIView):
 
 class AddProductToCartView(generics.GenericAPIView):
 
-    #permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     def post(self, request, user_id, beverage_id):
         order, created = Order.objects.get_or_create(customer_id=user_id, state=Order.PENDING)
@@ -42,7 +42,7 @@ class AddProductToCartView(generics.GenericAPIView):
 
 class CompleteOrderView(generics.GenericAPIView):
 
-    #permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     def post(self, request, user_id):
         order = get_object_or_404(Order, customer_id=user_id, state=Order.PENDING)
@@ -51,7 +51,7 @@ class CompleteOrderView(generics.GenericAPIView):
             for item in order.order_items.all():
                 if item.beverage.beverage_stock < item.amount:
                     return Response({
-                        "error": f"No hay suficiente stock para {item.beverage.name}. Cantidad disponible: {item.beverage.beverage_stock}"
+                        "error": f"No hay suficiente stock para {item.beverage.beverage_name}. Cantidad disponible: {item.beverage.beverage_stock}"
                     }, status=status.HTTP_400_BAD_REQUEST)
 
             # Descontar el stock de cada bebida
@@ -69,7 +69,7 @@ class CompleteOrderView(generics.GenericAPIView):
     
 class RemoveProductFromCartView(generics.GenericAPIView):
 
-    #permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
     
     def delete(self, request, user_id, beverage_id):
         order = get_object_or_404(Order, customer_id=user_id, state=Order.PENDING)
@@ -81,7 +81,7 @@ class RemoveProductFromCartView(generics.GenericAPIView):
 
 class DecreaseOrderItemView(generics.GenericAPIView):
 
-    #permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
     
     def post(self, request, user_id, beverage_id):
         # Obtener la orden pendiente del usuario

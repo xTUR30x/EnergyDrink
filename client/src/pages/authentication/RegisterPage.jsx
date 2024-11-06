@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom'
 import { BiUser } from 'react-icons/bi'
 import { AiOutlineLock } from 'react-icons/ai'
 import { CiMail } from "react-icons/ci";
-import { useRegisterPage } from '../hooks/accounts/useRegisterPage';
-import { InputField } from '../components/InputField';
+import { useRegisterPage } from '../../hooks/accounts/useRegisterPage';
+import { InputField } from '../../components/InputField';
 
 export const RegisterPage = () => {
 

@@ -1,8 +1,7 @@
-// src/components/CartTotal.js
 import React from 'react';
-import { useNavigate } from 'react-router-dom'; // Importa useNavigate
-import { completeOrder } from '../../api/orders/completeOrder'; // Asegúrate de que la ruta sea correcta
-import { useUserStore } from '../../stores/userStore'; // Asegúrate de que la ruta sea correcta
+import { useNavigate } from 'react-router-dom';
+import { completeOrder } from '../../api/orders/completeOrder';
+import { useUserStore } from '../../stores/userStore';
 
 export const CartTotal = ({ total, hasItems, onCartUpdated }) => {
     const navigate = useNavigate();

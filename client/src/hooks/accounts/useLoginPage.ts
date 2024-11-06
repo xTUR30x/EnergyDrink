@@ -3,6 +3,7 @@ import toast from 'react-hot-toast';
 import { login } from '../../api/accounts/login';
 import { errorHandler } from '../../api/accounts/errorHandler';
 import { useUserStore } from '../../stores/userStore';
+import { decodeJWT } from '../../utils/decodeJWT';
 
 
 export const useLoginPage = () => {
@@ -12,10 +13,6 @@ export const useLoginPage = () => {
 
   const setAccessToken = useUserStore(state => state.setAccessToken);
   const setRefreshToken = useUserStore(state => state.setRefreshToken);
-  const setFirstName = useUserStore(state => state.setFirstName);
-  const setLastName = useUserStore(state => state.setLastName);
-  const setUserId = useUserStore(state => state.setUserId);
-  const setUserEmail = useUserStore(state => state.setEmail);
   
     const onEmailChange = ( { target } ) => {
       setEmail(target.value)
@@ -46,14 +43,10 @@ export const useLoginPage = () => {
                   duration: 3000
                 })
                 
-                const { access, refresh, user_id, first_name, last_name, email } = data;
+                const { access, refresh } = data;
                 setAccessToken(access);
                 setRefreshToken(refresh);
-                setFirstName(first_name);
-                setLastName(last_name);
-                setEmail(email);
-                setUserId(user_id);
-                setUserEmail(email);
+                decodeJWT(access);
                 
                 // Redirigir a la página de login después de un breve retraso
                 setTimeout(() => {
