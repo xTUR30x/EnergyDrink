@@ -31,7 +31,7 @@ export const modifyProduct = async (productData: object, bevarage_id: string) =>
                     accessToken: newAccessToken,
                 });
 
-                return modifyProduct(productData);
+                return modifyProduct(productData, bevarage_id);
             } else {
                 console.error('No se pudo refrescar el token. Redirigiendo al login.');
                 return { error: 'Token refresh failed' };
