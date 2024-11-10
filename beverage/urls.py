@@ -6,7 +6,8 @@ router = DefaultRouter()
 router.register('flavors', views.FlavorViewSet)
 router.register('countries', views.CountryViewSet)
 router.register('companies', views.CompanyViewSet)
-router.register('products', views.BeverageViewSet)
+router.register('products', views.BeverageViewSet, basename='products')
+router.register('staff', views.StaffViewSet, basename='staff')
 
 urlpatterns = [
     path('', include(router.urls)),

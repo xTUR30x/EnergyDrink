@@ -25,11 +25,10 @@ export const completeOrder = async (id: string) => {
 
             if (refreshResponse.status === 200) {
                 const newAccessToken = refreshResponse.data.access; 
-                const newRefreshToken = refreshResponse.data.refresh;
+                console.log(refreshResponse.data)
 
                 useUserStore.setState({ 
                     accessToken: newAccessToken, 
-                    refreshToken: newRefreshToken 
                 });
                 
                 // Intenta nuevamente la solicitud con el nuevo token

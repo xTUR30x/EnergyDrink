@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { FaFilter } from "react-icons/fa6";
 import { FaShoppingCart, FaUserAlt } from "react-icons/fa";
+import { MdOutlineBusinessCenter } from "react-icons/md";
 import { Link } from 'react-router-dom';
 import { getFlavors } from '../../api/bevarages/getFlavors';
+import { useUserStore } from '../../stores/userStore';
 
 export const DesktopHeader = ({ onSearch }) => { // Recibe onSearch como prop
     const [flavors, setFlavors] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [selectedFlavor, setSelectedFlavor] = useState('');
     const [searchQuery, setSearchQuery] = useState('');
+    const { isStaff } = useUserStore();
 
     useEffect(() => {
         const fetchFlavors = async () => {
@@ -59,6 +62,11 @@ export const DesktopHeader = ({ onSearch }) => { // Recibe onSearch como prop
                     <Link to="/cart" className="text-gray-800 hover:bg-gray-200 rounded-md p-2">
                         <FaShoppingCart />
                     </Link>
+                    {isStaff &&
+                        <Link to="/staff" className="text-gray-800 hover:bg-gray-200 rounded-md p-2">
+                            <MdOutlineBusinessCenter />
+                        </Link>
+                    }
                 </div>
             </nav>
 

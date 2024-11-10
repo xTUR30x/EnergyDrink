@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { FaFilter } from "react-icons/fa6";
 import { FaHome, FaShoppingCart, FaUserAlt } from "react-icons/fa";
+import { MdOutlineBusinessCenter } from "react-icons/md";
 import { getFlavors } from '../../api/bevarages/getFlavors';
+import { useUserStore } from '../../stores/userStore';
+import { Link } from 'react-router-dom';
 
 export const MobileHeader = ({ onSearch }) => { // Recibe onSearch como prop
     const [flavors, setFlavors] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [selectedFlavor, setSelectedFlavor] = useState('');
     const [searchQuery, setSearchQuery] = useState('');
+    const { isStaff } = useUserStore();
 
     useEffect(() => {
         const fetchFlavors = async () => {
@@ -35,7 +39,7 @@ export const MobileHeader = ({ onSearch }) => { // Recibe onSearch como prop
         <header className="sticky top-0 z-50 bg-white shadow">
             <nav className="flex items-center justify-between p-4" aria-label="Global">
                 <div className="flex lg:flex-1">
-                    <a href="#" className="text-xl font-bold text-gray-800 flex items-center">
+                    <a href="/" className="text-xl font-bold text-gray-800 flex items-center">
                         <FaHome />
                     </a>
                 </div>
@@ -52,18 +56,23 @@ export const MobileHeader = ({ onSearch }) => { // Recibe onSearch como prop
                             }
                         }}
                     />
-                    <button 
-                        className="ml-2 text-gray-800 hover:bg-gray-200 rounded-md p-2"
-                        onClick={() => setShowModal(true)} // Muestra el modal al hacer clic
+                    <Link to="/" className="text-gray-800 hover:bg-gray-200 rounded-md p-2"
+                    onClick={() => setShowModal(true)}
                     >
                         <FaFilter />
-                    </button>
-                    <button className="ml-2 text-gray-800 hover:bg-gray-200 rounded-md p-2">
+                    </Link>
+                    <Link to="/profile" className="text-gray-800 hover:bg-gray-200 rounded-md p-2">
                         <FaUserAlt />
-                    </button>
-                    <button className="ml-2 text-gray-800 hover:bg-gray-200 rounded-md p-2">
+                    </Link>
+                    <Link to="/cart" className="text-gray-800 hover:bg-gray-200 rounded-md p-2">
                         <FaShoppingCart />
-                    </button>
+                    </Link>
+
+                    {isStaff &&
+                        <Link to="/staff" className="text-gray-800 hover:bg-gray-200 rounded-md p-2">
+                            <MdOutlineBusinessCenter />
+                        </Link>
+                    }
                 </div>
             </nav>
 

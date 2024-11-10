@@ -17,7 +17,6 @@ export const refreshTokens = async () => {
         
         if (status === 200) {
             setAccessToken(data.access); 
-            setRefreshToken(data.refresh); 
         }
 
         return { status, data };

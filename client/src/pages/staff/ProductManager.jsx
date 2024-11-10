@@ -1,27 +1,55 @@
 // src/components/ProductManager.js
-import React from 'react';
+import React, { useState } from 'react';
 import { FaEdit, FaTrash } from 'react-icons/fa'; // Importar los iconos
-import { useUserStore } from '../../stores/userStore'; // Asegúrate de que la ruta sea correcta
+import {AddProductModal} from '../../components/dialogs/AddProductModal';
+import {EditProductModal} from '../../components/dialogs/EditProductModal'; // Importar el nuevo modal
 
-export const ProductManager = ({ products, onEdit, onDelete }) => {
+export const ProductManager = ({ products, flavors, companies, onUpdate }) => {
+    const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [selectedProduct, setSelectedProduct] = useState(null); // Estado para almacenar el producto seleccionado
+
+    const handleEditClick = (product) => {
+        setSelectedProduct(product);
+        setIsEditModalOpen(true); 
+    };
+
     return (
         <div className="container mx-auto p-4">
-            <div className="flex justify-between items-center mb-4">
-                <h2 className="text-lg font-bold text-black">Gestor de Productos</h2>
-                <button className="bg-blue-600 text-white rounded px-4 py-2 hover:bg-blue-700" onClick={onEdit}>
-                    Agregar Producto
-                </button>
-            </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {products.map(product => (
-                    <ProductCard key={product.beverage_id} product={product} onEdit={onEdit} onDelete={onDelete} />
+                    <ProductCard 
+                        key={product.beverage_id} 
+                        product={product} 
+                        onEdit={() => handleEditClick(product)} 
+                    />
                 ))}
             </div>
+
+            {/* Modal para agregar producto */}
+            {isAddModalOpen && (
+                <AddProductModal 
+                    flavors={flavors}
+                    companies={companies}
+                    onClose={() => setIsAddModalOpen(false)} 
+                />
+            )}
+
+            {/* Modal para editar producto */}
+            {isEditModalOpen && (
+                <EditProductModal 
+                    onClose={() => setIsEditModalOpen(false)} 
+                    product={selectedProduct} 
+                    flavors={flavors} 
+                    companies={companies} 
+                    onUpdate={onUpdate}
+                />
+            )}
         </div>
     );
 };
 
-const ProductCard = ({ product, onEdit, onDelete }) => {
+const ProductCard = ({ product, onEdit }) => {
     return (
         <div className="flex items-center border rounded-lg shadow-md overflow-hidden p-4 bg-white">
             <img src={product.beverage_image} alt={product.beverage_name} className="w-24 h-24 object-cover mr-4" />
@@ -41,13 +69,7 @@ const ProductCard = ({ product, onEdit, onDelete }) => {
                 >
                     <FaEdit size={20} />
                 </button>
-                <button 
-                    onClick={() => onDelete(product.beverage_id)} 
-                    className="text-red-500 hover:text-red-700"
-                    title="Eliminar producto"
-                >
-                    <FaTrash size={20} />
-                </button>
+                {/* Aquí puedes agregar un botón para eliminar el producto si es necesario */}
             </div>
         </div>
     );

@@ -25,11 +25,9 @@ export const getUserOrders = async (id: string) => {
 
             if (refreshResponse.status === 200) {
                 const newAccessToken = refreshResponse.data.access; 
-                const newRefreshToken = refreshResponse.data.refresh;
 
                 useUserStore.setState({ 
                     accessToken: newAccessToken, 
-                    refreshToken: newRefreshToken 
                 });
 
 

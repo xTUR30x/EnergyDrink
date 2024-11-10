@@ -25,11 +25,9 @@ export const removeFromCart = async (user_id: string, beverage_id: string) => {
 
             if (refreshResponse.status === 200) {
                 const newAccessToken = refreshResponse.data.access; 
-                const newRefreshToken = refreshResponse.data.refresh;
 
                 useUserStore.setState({ 
                     accessToken: newAccessToken, 
-                    refreshToken: newRefreshToken 
                 });
                 
                 // Intenta nuevamente la solicitud con el nuevo token

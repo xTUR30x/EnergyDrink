@@ -1,15 +1,17 @@
-import axios from "axios";
+// src/api/orders/addProduct.js
+import axios from 'axios';
 import { refreshTokens } from '../../utils/refreshTokens';
 import { useUserStore } from '../../stores/userStore'; 
 
-export const getUserCart = async (id: string) => {
+export const addProduct = async (productData: object) => {
     const { accessToken } = useUserStore.getState(); // Obtén el access token desde el store
-    const url = `http://localhost:8000/orders/${id}/cart`;
+    const url = `http://localhost:8000/bevarages/staff/`; // URL para agregar productos
 
+    console.log(productData)
     try {
-        const response = await axios.get(url, {
+        const response = await axios.post(url, productData, {
             headers: {
-                Authorization: `JWT ${accessToken}` // Incluye el token en las cabeceras
+                Authorization: `JWT ${accessToken}`
             }
         });
 
@@ -24,26 +26,19 @@ export const getUserCart = async (id: string) => {
             const refreshResponse = await refreshTokens(); // Llama a la función para refrescar el token
 
             if (refreshResponse.status === 200) {
-                const newAccessToken = refreshResponse.data.access; 
+                const newAccessToken = refreshResponse.data.access;
 
                 useUserStore.setState({ 
-                    accessToken: newAccessToken, 
-                });
-                
-                // Intenta nuevamente la solicitud con el nuevo token
-                const retryResponse = await axios.get(url, {
-                    headers: {
-                        Authorization: `JWT ${newAccessToken}` // Usa el nuevo token
-                    }
+                    accessToken: newAccessToken,
                 });
 
-                return { status: retryResponse.status, data: retryResponse.data }; // Retorna los datos de la nueva solicitud
+                return addProduct(productData); // Intenta nuevamente con el nuevo token
             } else {
                 console.error('No se pudo refrescar el token. Redirigiendo al login.');
-                return { error: 'Token refresh failed' }; // Maneja el fallo en el refresco según tu lógica
+                return { error: 'Token refresh failed' };
             }
         }
 
-        return { error }; // Retorna cualquier otro error
+        return { error: error.response ? error.response.data : error }; // Retorna el mensaje de error
     }
 };

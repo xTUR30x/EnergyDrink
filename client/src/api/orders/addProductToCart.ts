@@ -25,12 +25,10 @@ export const addProductToCart = async (user_id: string, product_id: string) => {
             const refreshResponse = await refreshTokens(); // Llama a la función para refrescar el token
 
             if (refreshResponse.status === 200) {
-                const newAccessToken = refreshResponse.data.access; 
-                const newRefreshToken = refreshResponse.data.refresh;
+                const newAccessToken = refreshResponse.data.access;
 
                 useUserStore.setState({ 
-                    accessToken: newAccessToken, 
-                    refreshToken: newRefreshToken 
+                    accessToken: newAccessToken,
                 });
 
                 // Intenta nuevamente la solicitud con el nuevo token

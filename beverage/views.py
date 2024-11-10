@@ -36,3 +36,8 @@ class BeverageViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         return models.Beverage.objects.filter(beverage_stock__gt=0)  
 
+
+class StaffViewSet(viewsets.ModelViewSet):
+    permission_classes = [permissions.IsAdminUser]
+    queryset = models.Beverage.objects.all()
+    serializer_class = serializers.BeverageSerializer

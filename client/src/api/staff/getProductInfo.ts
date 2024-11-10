@@ -2,13 +2,13 @@ import axios from 'axios';
 import { refreshTokens } from '../../utils/refreshTokens';
 import { useUserStore } from '../../stores/userStore';
 
-export const getUserProfile = async (accessToken: string, userId: string) => {
-    const url = `http://localhost:8000/users/profile/${userId}`; // Asegúrate de que esta URL sea correcta
+export const getProductInfo = async (accessToken: string, bevarage_id: string) => {
+    const url = `http://localhost:8000/bevarages/staff/${bevarage_id}/`;
 
     try {
         const response = await axios.get(url, {
             headers: {
-                Authorization: `JWT ${accessToken}` // Incluye el token en las cabeceras
+                Authorization: `JWT ${accessToken}` 
             }
         });
         
@@ -31,10 +31,10 @@ export const getUserProfile = async (accessToken: string, userId: string) => {
                     accessToken: newAccessToken, // Actualiza solo el accessToken
                 }));
 
-                return getUserProfile(newAccessToken, userId); // Llama nuevamente a getUserProfile con el nuevo token
+                return getProductInfo(newAccessToken, bevarage_id);
             } else {
                 console.error('No se pudo refrescar el token. Redirigiendo al login.');
-                return { error: 'Token refresh failed' }; // Maneja el fallo en el refresco según tu lógica
+                return { error: 'Token refresh failed' };
             }
         }
 
