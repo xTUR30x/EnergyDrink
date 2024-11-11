@@ -7,7 +7,8 @@ import { getFlavors } from '../../api/bevarages/getFlavors'; // Asegúrate de qu
 import { getCompanies } from '../../api/bevarages/getCompanies'; // Asegúrate de que la ruta sea correcta
 import { useUserStore } from '../../stores/userStore';
 import { AddProductModal } from '../../components/dialogs/AddProductModal'; // Asegúrate de que la ruta sea correcta
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom'; // Importa Navigate para redirección
+import { isAuthenticated } from '../../utils/isAuthenticated'; // Asegúrate de importar tu función de autenticación
 
 export const StaffPage = () => {
     const [products, setProducts] = useState([]); // Estado para almacenar los productos
@@ -15,6 +16,9 @@ export const StaffPage = () => {
     const [flavors, setFlavors] = useState([]); // Estado para almacenar sabores
     const [companies, setCompanies] = useState([]); // Estado para almacenar compañías
     const { accessToken } = useUserStore.getState(); // Obtén el access token desde el store
+
+    // Verifica si el usuario está autenticado
+    const authenticated = isAuthenticated();
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -50,7 +54,6 @@ export const StaffPage = () => {
         fetchFlavorsAndCompanies();
     }, []); // Solo se ejecuta una vez al montar el componente
 
-
     const fetchProducts = async () => {
         const { status, data, error } = await getProducts(accessToken);
 
@@ -61,6 +64,10 @@ export const StaffPage = () => {
         }
     };
 
+    // Redirige a la página de login si no está autenticado
+    if (!authenticated) {
+        return <Navigate to="/login" />;
+    }
 
     return (
         <>

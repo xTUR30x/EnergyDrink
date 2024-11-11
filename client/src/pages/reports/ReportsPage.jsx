@@ -7,11 +7,16 @@ import { generateProductReportPDF } from '../../utils/generateProductReportPDF';
 import { generateUserOrdersReportPDF } from '../../utils/generateUserOrdersReportPDF';
 import { useUserStore } from '../../stores/userStore';
 import { getAvailableBeverages } from '../../api/bevarages/getAvailableBeverages';
+import { Navigate } from 'react-router-dom'; // Importa Navigate para redirección
+import { isAuthenticated } from '../../utils/isAuthenticated'; // Asegúrate de importar tu función de autenticación
 
 export const ReportsPage = () => {
     const [users, setUsers] = useState([]);
     const [selectedUser, setSelectedUser] = useState('');
-    const { accessToken } = useUserStore();
+    const { accessToken } = useUserStore.getState(); // Obtén el access token desde el store
+
+    // Verifica si el usuario está autenticado
+    const authenticated = isAuthenticated();
 
     useEffect(() => {
         const fetchUsers = async () => {
@@ -25,11 +30,11 @@ export const ReportsPage = () => {
         };
 
         fetchUsers();
-    }, []);
+    }, [accessToken]); // Dependencia del access token
 
     const handleGenerateProductReport = async () => {
         // Obtener los productos disponibles desde el backend
-        const { status, data: productsData, error } = await getAvailableBeverages(); // Asegúrate de que esta función esté definida
+        const { status, data: productsData, error } = await getAvailableBeverages();
 
         if (status === 200) {
             generateProductReportPDF(productsData); // Llama a la función para generar el PDF
@@ -48,14 +53,19 @@ export const ReportsPage = () => {
         const { status, data, error } = await getUserOrders(selectedUser, accessToken);
         
         if (status === 200) {
-            const userOrdersData = data; // Asumiendo que `data` contiene las órdenes del usuario
+            const userOrdersData = data; 
             const userName = users.find(user => user.id === parseInt(selectedUser));
             
-            generateUserOrdersReportPDF(userOrdersData, userName.first_name + ' ' + userName.last_name); // Llama a la función para generar el PDF
+            generateUserOrdersReportPDF(userOrdersData, userName.first_name + ' ' + userName.last_name);
         } else {
             console.error('Error al generar el reporte de órdenes:', error);
         }
     };
+
+    // Redirige a la página de login si no está autenticado
+    if (!authenticated) {
+        return <Navigate to="/login" />;
+    }
 
     return (
         <>
