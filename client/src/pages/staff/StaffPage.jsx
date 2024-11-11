@@ -7,6 +7,7 @@ import { getFlavors } from '../../api/bevarages/getFlavors'; // Asegúrate de qu
 import { getCompanies } from '../../api/bevarages/getCompanies'; // Asegúrate de que la ruta sea correcta
 import { useUserStore } from '../../stores/userStore';
 import { AddProductModal } from '../../components/dialogs/AddProductModal'; // Asegúrate de que la ruta sea correcta
+import { Link } from 'react-router-dom';
 
 export const StaffPage = () => {
     const [products, setProducts] = useState([]); // Estado para almacenar los productos
@@ -71,6 +72,11 @@ export const StaffPage = () => {
                     className="bg-blue-600 text-white rounded px-4 py-2 hover:bg-blue-700 m-4"
                 >
                     Agregar Producto
+                </button>
+                <button 
+                    className="bg-blue-600 text-white rounded px-4 py-2 hover:bg-blue-700 m-4"
+                >
+                    <Link to="/reports" className="text-xl text-white">Reportes</Link>
                 </button>
             </div>
             <ProductManager  

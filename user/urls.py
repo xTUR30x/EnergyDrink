@@ -6,4 +6,5 @@ urlpatterns = [
     path('logout/', views.LogoutView.as_view(), name='logout'),
     path('token/', views.CustomTokenObtainPairView.as_view(), name='token_pair'),
     path('profile/<int:user_id>/', views.UserProfileView.as_view(), name='user_profile'),
+    path('users/', views.NonAdminUserListView.as_view(), name='non_admin_users'),
 ]

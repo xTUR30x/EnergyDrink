@@ -5,7 +5,7 @@ from rest_framework.exceptions import NotFound
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from rest_framework_simplejwt.views import TokenObtainPairView
 from django.contrib.auth import get_user_model
 
@@ -39,3 +39,11 @@ class UserProfileView(generics.GenericAPIView):
 
         serializer = serializers.UserCreateSerializer(user)
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+class NonAdminUserListView(generics.ListAPIView):
+    permission_classes = [IsAdminUser]
+    def get(self, request):
+        # Filtrar usuarios que no son administradores
+        non_admin_users = models.UserAccount.objects.exclude(is_superuser=True).values('id', 'first_name', 'last_name')
+
+        return Response(non_admin_users, status=status.HTTP_200_OK)

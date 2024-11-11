@@ -10,6 +10,7 @@ import { ForgotPasswordPage } from './pages/authentication/ForgotPasswordPage';
 import { UserProfile } from './pages/profile/UserProfile';
 import { OrderPage } from './pages/orders/OrderPage';
 import { StaffPage } from './pages/staff/StaffPage';
+import { ReportsPage } from './pages/reports/ReportsPage';
 
 
 
@@ -29,6 +30,7 @@ function App() {
         <Route path='profile/' element={ <UserProfile/> }/>
         <Route path='orders/' element={ <OrderPage/> }/>
         <Route path='staff/' element={ <StaffPage/> }/>
+        <Route path='reports/' element={ <ReportsPage/> }/>
       </Routes>
     </>
   );
