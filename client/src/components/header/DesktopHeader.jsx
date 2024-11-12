@@ -50,12 +50,15 @@ export const DesktopHeader = ({ onSearch }) => { // Recibe onSearch como prop
                     onChange={(e) => setSearchQuery(e.target.value)} // Actualiza el estado del query
                     onKeyDown={(e) => e.key === 'Enter' && handleSearch()} // Llama a handleSearch al presionar Enter
                 />
-                    <button 
-                        className="text-gray-800 hover:bg-gray-200 rounded-md p-2"
-                        onClick={() => setShowModal(true)} // Muestra el modal al hacer clic
-                    >
-                        <FaFilter />
-                    </button>
+                    <Link to="/">
+                        <button 
+                            className="text-gray-800 hover:bg-gray-200 rounded-md p-2"
+                            onClick={() => setShowModal(true)}
+                        >
+                            <FaFilter />
+                        </button>
+                    </Link>
+
                     <Link to="/profile" className="text-gray-800 hover:bg-gray-200 rounded-md p-2">
                         <FaUserAlt />
                     </Link>
