@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { modifyProduct } from '../../api/staff/modifyProduct'; // Cambia esto si tienes una función específica para editar
+import { modifyProduct } from '../../api/staff/modifyProduct'; 
 
 export const EditProductModal = ({ onClose, product, flavors, companies, onUpdate }) => {
     const [productData, setProductData] = useState({
@@ -9,13 +9,13 @@ export const EditProductModal = ({ onClose, product, flavors, companies, onUpdat
         beverage_price: '',
         beverage_description: '',
         milliliters: '',
-        beverage_image: '', // Cambia a string para almacenar la cadena base64
+        beverage_image: '', 
         flavor: {},
         company: {}
     });
 
     useEffect(() => {
-        // Cargar datos del producto en el estado al abrir el modal
+        
         if (product) {
             setProductData({
                 beverage_id: product.beverage_id,
@@ -24,7 +24,7 @@ export const EditProductModal = ({ onClose, product, flavors, companies, onUpdat
                 beverage_price: product.beverage_price,
                 beverage_description: product.beverage_description,
                 milliliters: product.milliliters,
-                beverage_image: product.beverage_image || '', // Inicializa con la imagen existente
+                beverage_image: product.beverage_image || '', 
                 flavor: product.flavor,
                 company: product.company
             });
@@ -49,30 +49,30 @@ export const EditProductModal = ({ onClose, product, flavors, companies, onUpdat
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Crear un objeto con los datos del producto en el formato correcto
+        
         const payload = {
             beverage_name: productData.beverage_name,
             beverage_stock: productData.beverage_stock,
             beverage_price: productData.beverage_price,
             beverage_description: productData.beverage_description,
             milliliters: productData.milliliters,
-            // No se incluye bebida_image aquí para mantener la imagen existente
+            
             flavor: {
-                flavor_id: productData.flavor.flavor_id, // Asegúrate de que esto esté presente
-                flavor_name: productData.flavor.flavor_name // Asegúrate de que esto esté presente
+                flavor_id: productData.flavor.flavor_id, 
+                flavor_name: productData.flavor.flavor_name 
             },
             company: {
-                company_id: productData.company.company_id, // Asegúrate de que esto esté presente
-                company_name: productData.company.company_name // Asegúrate de que esto esté presente
+                company_id: productData.company.company_id, 
+                company_name: productData.company.company_name 
             }
         };
 
         // Enviar los datos al backend para actualizar el producto
-        const { status, data, error } = await modifyProduct(payload, productData.beverage_id); // Cambia esto si tienes una función específica para editar
+        const { status, data, error } = await modifyProduct(payload, productData.beverage_id); 
         
-        if (status === 200) { // Cambia a 200 o el código que tu API retorne al actualizar
-            onUpdate(); // Llama a la función para recargar la lista de productos
-            onClose(); // Cierra el modal después de actualizar el producto
+        if (status === 200) { 
+            onUpdate(); 
+            onClose(); 
         } else {
             console.error('Error al actualizar el producto:', error);
             alert(`Error: ${error.message || 'No se pudo actualizar el producto.'}`);

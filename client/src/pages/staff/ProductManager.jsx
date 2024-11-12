@@ -1,13 +1,12 @@
-// src/components/ProductManager.js
 import React, { useState } from 'react';
-import { FaEdit, FaTrash } from 'react-icons/fa'; // Importar los iconos
+import { FaEdit, FaTrash } from 'react-icons/fa'; 
 import {AddProductModal} from '../../components/dialogs/AddProductModal';
-import {EditProductModal} from '../../components/dialogs/EditProductModal'; // Importar el nuevo modal
+import {EditProductModal} from '../../components/dialogs/EditProductModal'; 
 
 export const ProductManager = ({ products, flavors, companies, onUpdate }) => {
     const [isAddModalOpen, setIsAddModalOpen] = useState(false);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-    const [selectedProduct, setSelectedProduct] = useState(null); // Estado para almacenar el producto seleccionado
+    const [selectedProduct, setSelectedProduct] = useState(null);
 
     const handleEditClick = (product) => {
         setSelectedProduct(product);

@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { getFlavors } from '../../api/bevarages/getFlavors';
 import { useUserStore } from '../../stores/userStore';
 
-export const DesktopHeader = ({ onSearch }) => { // Recibe onSearch como prop
+export const DesktopHeader = ({ onSearch }) => { 
     const [flavors, setFlavors] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [selectedFlavor, setSelectedFlavor] = useState('');
@@ -25,14 +25,14 @@ export const DesktopHeader = ({ onSearch }) => { // Recibe onSearch como prop
     }, []);
 
     const handleSearch = async () => {
-        await onSearch(searchQuery, selectedFlavor); // Llama a la función de búsqueda pasada como prop
-        setShowModal(false); // Cierra el modal después de buscar
+        await onSearch(searchQuery, selectedFlavor); 
+        setShowModal(false); 
     };
 
     const handleClearFilters = async () => {
-        setSearchQuery(''); // Limpia el campo de búsqueda
-        setSelectedFlavor(''); // Resetea el sabor seleccionado
-        await onSearch('', ''); // Llama a onSearch con valores vacíos para mostrar todos los productos
+        setSearchQuery(''); 
+        setSelectedFlavor(''); 
+        await onSearch('', '');
       };
 
     return (
@@ -47,8 +47,8 @@ export const DesktopHeader = ({ onSearch }) => { // Recibe onSearch como prop
                     className="border border-gray-300 rounded-md px-2 py-1" 
                     placeholder="Buscar productos..." 
                     value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)} // Actualiza el estado del query
-                    onKeyDown={(e) => e.key === 'Enter' && handleSearch()} // Llama a handleSearch al presionar Enter
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onKeyDown={(e) => e.key === 'Enter' && handleSearch()} 
                 />
                     <Link to="/">
                         <button 
@@ -86,7 +86,7 @@ export const DesktopHeader = ({ onSearch }) => { // Recibe onSearch como prop
                                         id={`flavor-${flavor.flavor_id}`} 
                                         name="flavor" 
                                         value={flavor.flavor_id}
-                                        onChange={(e) => setSelectedFlavor(e.target.value)} // Actualiza el sabor seleccionado
+                                        onChange={(e) => setSelectedFlavor(e.target.value)} 
                                     />
                                     <label htmlFor={`flavor-${flavor.flavor_id}`} className="ml-2">{flavor.flavor_name}</label>
                                 </div>
@@ -99,7 +99,7 @@ export const DesktopHeader = ({ onSearch }) => { // Recibe onSearch como prop
                             Buscar
                         </button>
                         <button 
-                            onClick={handleClearFilters} // Llama a handleClearFilters al hacer clic
+                            onClick={handleClearFilters} 
                             className="ml-2 bg-red-500 text-white rounded-md px-4 py-2"
                         >
                             Quitar Filtros

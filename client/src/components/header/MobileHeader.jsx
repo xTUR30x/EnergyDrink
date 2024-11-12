@@ -6,7 +6,7 @@ import { getFlavors } from '../../api/bevarages/getFlavors';
 import { useUserStore } from '../../stores/userStore';
 import { Link } from 'react-router-dom';
 
-export const MobileHeader = ({ onSearch }) => { // Recibe onSearch como prop
+export const MobileHeader = ({ onSearch }) => { 
     const [flavors, setFlavors] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [selectedFlavor, setSelectedFlavor] = useState('');
@@ -25,15 +25,14 @@ export const MobileHeader = ({ onSearch }) => { // Recibe onSearch como prop
     }, []);
 
     const handleSearch = async () => {
-        await onSearch(searchQuery, selectedFlavor); // Llama a la función de búsqueda pasada como prop
-        setShowModal(false); // Cierra el modal después de buscar
+        await onSearch(searchQuery, selectedFlavor); 
+        setShowModal(false); 
     };
 
     const handleClearFilters = async () => {
-        setSearchQuery(''); // Limpia el campo de búsqueda
-        setSelectedFlavor(''); // Resetea el sabor seleccionado
-        await onSearch('', ''); // Llama a onSearch con valores vacíos para mostrar todos los productos
-    };
+        setSearchQuery(''); 
+        setSelectedFlavor(''); 
+        await onSearch('', ''); 
 
     return (
         <header className="sticky top-0 z-50 bg-white shadow">
@@ -49,10 +48,10 @@ export const MobileHeader = ({ onSearch }) => { // Recibe onSearch como prop
                         className="border border-gray-300 rounded-md px-2 py-1 text-black" 
                         placeholder="Buscar productos..." 
                         value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)} // Actualiza el estado del query
+                        onChange={(e) => setSearchQuery(e.target.value)}
                         onKeyDown={(e) => {
                             if (e.key === 'Enter') {
-                                handleSearch(); // Llama a handleSearch al presionar Enter
+                                handleSearch(); 
                             }
                         }}
                     />

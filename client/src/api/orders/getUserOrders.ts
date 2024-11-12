@@ -18,7 +18,7 @@ export const getUserOrders = async (id: string) => {
     } catch (error) {
         console.error('Error al realizar la petición:', error);
 
-        // Verifica si el error es por un token expirado o inválido
+        
         if (error.response && error.response.data && error.response.data.code === "token_not_valid") {
             console.log('Token expirado o inválido. Intentando refrescar el token...');
             const refreshResponse = await refreshTokens();
@@ -31,20 +31,20 @@ export const getUserOrders = async (id: string) => {
                 });
 
 
-                // Intenta nuevamente la solicitud con el nuevo token
+                
                 const retryResponse = await axios.get(url, {
                     headers: {
-                        Authorization: `JWT ${newAccessToken}` // Usa el nuevo token
+                        Authorization: `JWT ${newAccessToken}` 
                     }
                 });
 
-                return { status: retryResponse.status, data: retryResponse.data }; // Retorna los datos de la nueva solicitud
+                return { status: retryResponse.status, data: retryResponse.data }; 
             } else {
                 console.error('No se pudo refrescar el token. Redirigiendo al login.');
-                return { error: 'Token refresh failed' }; // Maneja el fallo en el refresco según tu lógica
+                return { error: 'Token refresh failed' }; 
             }
         }
 
-        return { error }; // Retorna cualquier otro error
+        return { error }; 
     }
 };

@@ -2,20 +2,20 @@
 import React, { useEffect, useState } from 'react';
 import { ProductManager } from './ProductManager';
 import { Header } from '../../components/header/Header';
-import { getProducts } from '../../api/staff/getProducts'; // Asegúrate de que la ruta sea correcta
-import { getFlavors } from '../../api/bevarages/getFlavors'; // Asegúrate de que la ruta sea correcta
-import { getCompanies } from '../../api/bevarages/getCompanies'; // Asegúrate de que la ruta sea correcta
+import { getProducts } from '../../api/staff/getProducts'; 
+import { getFlavors } from '../../api/bevarages/getFlavors'; 
+import { getCompanies } from '../../api/bevarages/getCompanies'; 
 import { useUserStore } from '../../stores/userStore';
-import { AddProductModal } from '../../components/dialogs/AddProductModal'; // Asegúrate de que la ruta sea correcta
-import { Link, Navigate } from 'react-router-dom'; // Importa Navigate para redirección
-import { isAuthenticated } from '../../utils/isAuthenticated'; // Asegúrate de importar tu función de autenticación
+import { AddProductModal } from '../../components/dialogs/AddProductModal'; 
+import { Link, Navigate } from 'react-router-dom'; 
+import { isAuthenticated } from '../../utils/isAuthenticated'; 
 
 export const StaffPage = () => {
-    const [products, setProducts] = useState([]); // Estado para almacenar los productos
-    const [isModalOpen, setIsModalOpen] = useState(false); // Estado para manejar la visibilidad del modal
-    const [flavors, setFlavors] = useState([]); // Estado para almacenar sabores
-    const [companies, setCompanies] = useState([]); // Estado para almacenar compañías
-    const { accessToken } = useUserStore.getState(); // Obtén el access token desde el store
+    const [products, setProducts] = useState([]); 
+    const [isModalOpen, setIsModalOpen] = useState(false); 
+    const [flavors, setFlavors] = useState([]); 
+    const [companies, setCompanies] = useState([]); 
+    const { accessToken } = useUserStore.getState(); 
 
     // Verifica si el usuario está autenticado
     const authenticated = isAuthenticated();
@@ -25,7 +25,7 @@ export const StaffPage = () => {
             const { status, data, error } = await getProducts(accessToken); // Obtiene los productos
 
             if (status === 200) {
-                setProducts(data); // Almacena los productos en el estado
+                setProducts(data);
             } else {
                 console.error('Error al obtener productos:', error);
             }

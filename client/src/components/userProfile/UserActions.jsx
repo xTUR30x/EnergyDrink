@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useUserStore } from '../../stores/userStore'; 
 
 export const UserActions = () => {
-    const navigate = useNavigate(); // Inicializa el hook para la navegación
+    const navigate = useNavigate(); 
     const clearUserData = useUserStore((state) => {
         return {
             setAccessToken: state.setAccessToken,

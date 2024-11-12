@@ -23,15 +23,15 @@ export const AddProductModal = ({ onClose, flavors, companies }) => {
         const reader = new FileReader();
         
         reader.onloadend = () => {
-            // Almacena la cadena base64 en el estado
+            
             setProductData(prevData => ({
                 ...prevData,
-                beverage_image: reader.result // Esto será una cadena base64
+                beverage_image: reader.result 
             }));
         };
         
         if (file) {
-            reader.readAsDataURL(file); // Leer el archivo como URL de datos (base64)
+            reader.readAsDataURL(file); 
         }
     };
 
@@ -48,14 +48,14 @@ export const AddProductModal = ({ onClose, flavors, companies }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Crear un objeto con los datos del producto en el formato correcto
+        
         const payload = {
             beverage_name: productData.beverage_name,
             beverage_stock: productData.beverage_stock,
             beverage_price: productData.beverage_price,
             beverage_description: productData.beverage_description,
             milliliters: productData.milliliters,
-            beverage_image: productData.beverage_image, // Ahora esto es una cadena base64
+            beverage_image: productData.beverage_image, 
             flavor: {
                 flavor_id: productData.flavor.flavor_id,
                 flavor_name: productData.flavor.flavor_name
@@ -66,14 +66,14 @@ export const AddProductModal = ({ onClose, flavors, companies }) => {
             }
         };
 
-        console.log('Datos a enviar:', payload); // Imprimir para verificar
+        console.log('Datos a enviar:', payload);
 
         // Enviar los datos al backend
         const { status, data, error } = await addProduct(payload);
         
         if (status === 201) {
             console.log('Producto agregado con éxito:', data);
-            onClose(); // Cierra el modal después de agregar el producto
+            onClose(); 
         } else {
             console.error('Error al agregar el producto:', error);
             alert(`Error: ${error.message || 'No se pudo agregar el producto.'}`);

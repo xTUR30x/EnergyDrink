@@ -1,4 +1,3 @@
-// src/components/CartPage.js
 import React, { useState, useEffect } from 'react';
 import { Cart } from './Cart';
 import { Header } from '../../components/header/Header';
@@ -20,7 +19,7 @@ export const CartPage = () => {
     const checkAuthentication = () => {
       const isAuth = isAuthenticated(); // Verifica la autenticación
       setAuthenticated(isAuth);
-      setLoading(false); // Cambia el estado de carga una vez que se verifica la autenticación
+      setLoading(false);
     };
 
     checkAuthentication(); // Llama a la función para verificar autenticación
@@ -35,7 +34,7 @@ export const CartPage = () => {
 
   // Si aún está cargando, puedes mostrar un loader o un mensaje
   if (loading) {
-    return <div>Cargando...</div>; // O cualquier otro indicador de carga
+    return <div>Cargando...</div>;
   }
 
   return (

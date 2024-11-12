@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 import { useUserStore } from '../../../stores/userStore';
 import { addProductToCart } from '../../../api/orders/addProductToCart';
-import { isAuthenticated } from '../../../utils/isAuthenticated'; // Asegúrate de que la ruta sea correcta
-import { useNavigate } from 'react-router-dom'; // Importa useNavigate
-import { FaShoppingCart, FaCheck } from 'react-icons/fa'; // Importa los íconos
+import { isAuthenticated } from '../../../utils/isAuthenticated'; 
+import { useNavigate } from 'react-router-dom';
+import { FaShoppingCart, FaCheck } from 'react-icons/fa';
 
 export const ProductCardMobile = ({ beverage }) => {
-    const { userId } = useUserStore(); // Obtén el userId del store
-    const navigate = useNavigate(); // Inicializa el hook de navegación
-    const [isAnimating, setIsAnimating] = useState(false); // Estado para manejar la animación
-    const [isAdded, setIsAdded] = useState(false); // Estado para manejar si el producto ha sido agregado
+    const { userId } = useUserStore(); 
+    const navigate = useNavigate();
+    const [isAnimating, setIsAnimating] = useState(false);
+    const [isAdded, setIsAdded] = useState(false); 
 
     const handleAddToCart = async () => {
         if (!isAuthenticated()) { 
-            navigate('/login'); // Redirige al usuario a la página de inicio de sesión
+            navigate('/login'); 
             return;
         }
 
@@ -22,10 +22,10 @@ export const ProductCardMobile = ({ beverage }) => {
             return;
         }
 
-        setIsAnimating(true); // Inicia la animación
-        setIsAdded(true); // Cambia el estado a agregado
+        setIsAnimating(true); 
+        setIsAdded(true); 
 
-        const { status, data } = await addProductToCart(userId, beverage.beverage_id); // Usa beverage.beverage_id
+        const { status, data } = await addProductToCart(userId, beverage.beverage_id); 
 
         if (status === 200) {
             console.log('Producto agregado al carrito:', data);
@@ -34,9 +34,9 @@ export const ProductCardMobile = ({ beverage }) => {
         }
 
         setTimeout(() => {
-            setIsAnimating(false); // Detiene la animación después de un tiempo
-            setIsAdded(false); // Resetea el estado de agregado después de un tiempo
-        }, 1000); // Duración de la animación (ajusta según sea necesario)
+            setIsAnimating(false); 
+            setIsAdded(false); 
+        }, 1000); 
     };
 
     return (
@@ -51,9 +51,9 @@ export const ProductCardMobile = ({ beverage }) => {
                     className={`absolute bottom-2 right-2 rounded-full p-2 transition-all duration-300 ${isAdded ? 'bg-green-500' : 'bg-blue-600'} text-white hover:bg-blue-700`}
                 >
                     {isAdded ? (
-                        <FaCheck className="text-white" /> // Ícono de check en blanco
+                        <FaCheck className="text-white" /> 
                     ) : (
-                        <FaShoppingCart /> // Ícono del carrito
+                        <FaShoppingCart /> 
                     )}
                 </button>
             </div>

@@ -1,8 +1,7 @@
-// src/components/userProfile/UserInfo.js
 import React from 'react';
 
 export const UserInfo = ({ userData }) => {
-    if (!userData) return null; // Asegúrate de que hay datos antes de intentar acceder a ellos
+    if (!userData) return null; 
 
     const { first_name, last_name, email, profile_picture } = userData;
 

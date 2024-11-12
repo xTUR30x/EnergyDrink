@@ -1,4 +1,3 @@
-// src/components/CartPage.js
 import React, { useEffect, useState } from 'react';
 import { CartItem } from '../../components/cart/CartItem';
 import { CartTotal } from '../../components/cart/CartTotal';

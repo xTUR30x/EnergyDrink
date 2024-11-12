@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { DesktopHeader } from './DesktopHeader';
 import { MobileHeader } from './MobileHeader';
 
-export const Header = ({ onSearch }) => { // Recibe onSearch como prop
+export const Header = ({ onSearch }) => { 
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
     const handleResize = () => {
